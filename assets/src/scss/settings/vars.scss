@@ -1,0 +1,74 @@
+﻿$color-black: #000000;
+$color-white: #ffffff;
+$color-yellow: #e8e959;
+$color-yellow-dark: #6f6600;
+$color-green: #a2c037;
+$color-green-alt: #8ca530;
+$color-green-dark: #5ea552;
+$color-green-light: #92b97c;
+$color-blue-light: #59b7a6;
+$color-blue: #7ebae0;
+$color-blue-dark: #016eb1;
+$color-blue-copasa: #1662af;
+$color-gray: #525251;
+$color-gray-light: #676e6f;
+$color-bg: #eae8e9;
+
+$color-yellow-conta: #dfa832;
+$color-blue-conta: #86c2de;
+$color-green-conta: #90bc6d;
+
+
+$theme-colors: (
+  'black':	$color-black,
+  'white':	$color-white,
+  'gray':	$color-gray,
+  'gray-light':	$color-gray-light,
+  'bg':	$color-bg,
+  'yellow':	$color-yellow,
+  'yellow-dark':	$color-yellow-dark,
+  'blue-copasa':	$color-blue-copasa,
+  'green':	$color-green,
+  'green-alt':	$color-green-alt,
+  'green-dark':	$color-green-dark,
+  'green-light,':	$color-green-light,
+  "blue": $color-blue,
+  "blue-dark": $color-blue-dark,
+  "blue-light": $color-blue-light
+);
+
+@mixin hover-focus {
+    &:hover,
+    &:focus {
+        @content;
+    }
+}
+
+@mixin custom-bg-variant($parent, $value) {
+    #{$parent} {
+        background-color: $value !important;
+    }
+
+    a#{$parent},
+    button#{$parent} {
+    
+        @include hover-focus {
+            background-color: darken($value, 10%) !important;
+        }
+    }
+}
+
+@mixin custom-color-variant($parent, $value) {
+    #{$parent} {
+        color: $value;
+
+        h2,p,h3,h4{
+            color: $value;
+        }
+    }
+}
+
+@each $color, $value in $theme-colors {
+    @include custom-color-variant('.color-#{$color}',$value);
+    @include custom-bg-variant('.bg-#{$color}', $value);
+}
